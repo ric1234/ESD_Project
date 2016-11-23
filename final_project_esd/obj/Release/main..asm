@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Tue Nov 22 21:27:16 2016
+; This file generated Wed Nov 23 14:07:50 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -9,7 +9,6 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _fixed_blocks
 	.globl _block
 	.globl _main
 	.globl _lcd_init
@@ -226,6 +225,7 @@
 	.globl _RCAP2H
 	.globl _RCAP2L
 	.globl _T2CON
+	.globl _fixed_blocks
 	.globl _add_y
 	.globl _add_x
 ;--------------------------------------------------------
@@ -491,6 +491,8 @@ _j:
 	.ds 2
 _k:
 	.ds 2
+_m:
+	.ds 2
 _chip:
 	.ds 2
 _next_block:
@@ -507,6 +509,8 @@ _lcddata_b_a_1_1:
 ; external initialized ram data
 ;--------------------------------------------------------
 	.area XISEG   (XDATA)
+_fixed_blocks::
+	.ds 64
 	.area HOME    (CODE)
 	.area GSINIT0 (CODE)
 	.area GSINIT1 (CODE)
@@ -558,7 +562,7 @@ __sdcc_program_startup:
 ;i                         Allocated with name '_delay_i_1_1'
 ;j                         Allocated with name '_delay_j_1_1'
 ;------------------------------------------------------------
-;	main.c:132: void delay(unsigned int d){
+;	main.c:149: void delay(unsigned int d){
 ;	-----------------------------------------
 ;	 function delay
 ;	-----------------------------------------
@@ -579,7 +583,7 @@ _delay:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	main.c:134: for(i=0;i< d;i++)
+;	main.c:151: for(i=0;i< d;i++)
 ;	genAssign
 	mov	dptr,#_delay_d_1_1
 	movx	a,@dptr
@@ -602,7 +606,7 @@ _delay:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00108$
 ;	Peephole 300	removed redundant label 00116$
-;	main.c:135: for(j=0;j<5;j++);
+;	main.c:152: for(j=0;j<5;j++);
 ;	genAssign
 	mov	r6,#0x05
 	mov	r7,#0x00
@@ -620,7 +624,7 @@ _delay:
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00103$
 ;	Peephole 300	removed redundant label 00118$
-;	main.c:134: for(i=0;i< d;i++)
+;	main.c:151: for(i=0;i< d;i++)
 ;	genPlus
 ;     genPlusIncr
 ;	tail increment optimized (range 7)
@@ -636,7 +640,7 @@ _delay:
 ;------------------------------------------------------------
 ;a                         Allocated with name '_lcd_port_a_1_1'
 ;------------------------------------------------------------
-;	main.c:138: void lcd_port(char a)
+;	main.c:155: void lcd_port(char a)
 ;	-----------------------------------------
 ;	 function lcd_port
 ;	-----------------------------------------
@@ -645,7 +649,7 @@ _lcd_port:
 	mov	a,dpl
 	mov	dptr,#_lcd_port_a_1_1
 	movx	@dptr,a
-;	main.c:140: if(a & 1)
+;	main.c:157: if(a & 1)
 ;	genAssign
 	mov	dptr,#_lcd_port_a_1_1
 	movx	a,@dptr
@@ -656,17 +660,17 @@ _lcd_port:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.0,00102$
 ;	Peephole 300	removed redundant label 00135$
-;	main.c:141: D0 = 1;
+;	main.c:158: D0 = 1;
 ;	genAssign
 	setb	_P2_0
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00103$
 00102$:
-;	main.c:143: D0 = 0;
+;	main.c:160: D0 = 0;
 ;	genAssign
 	clr	_P2_0
 00103$:
-;	main.c:145: if(a & 2)
+;	main.c:162: if(a & 2)
 ;	genAssign
 	mov	dptr,#_lcd_port_a_1_1
 	movx	a,@dptr
@@ -677,17 +681,17 @@ _lcd_port:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.1,00105$
 ;	Peephole 300	removed redundant label 00136$
-;	main.c:146: D1 = 1;
+;	main.c:163: D1 = 1;
 ;	genAssign
 	setb	_P2_1
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00106$
 00105$:
-;	main.c:148: D1 = 0;
+;	main.c:165: D1 = 0;
 ;	genAssign
 	clr	_P2_1
 00106$:
-;	main.c:150: if(a & 4)
+;	main.c:167: if(a & 4)
 ;	genAssign
 	mov	dptr,#_lcd_port_a_1_1
 	movx	a,@dptr
@@ -698,17 +702,17 @@ _lcd_port:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.2,00108$
 ;	Peephole 300	removed redundant label 00137$
-;	main.c:151: D2 = 1;
+;	main.c:168: D2 = 1;
 ;	genAssign
 	setb	_P2_2
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00109$
 00108$:
-;	main.c:153: D2 = 0;
+;	main.c:170: D2 = 0;
 ;	genAssign
 	clr	_P2_2
 00109$:
-;	main.c:155: if(a & 8)
+;	main.c:172: if(a & 8)
 ;	genAssign
 	mov	dptr,#_lcd_port_a_1_1
 	movx	a,@dptr
@@ -719,17 +723,17 @@ _lcd_port:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.3,00111$
 ;	Peephole 300	removed redundant label 00138$
-;	main.c:156: D3 = 1;
+;	main.c:173: D3 = 1;
 ;	genAssign
 	setb	_P2_3
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00112$
 00111$:
-;	main.c:158: D3 = 0;
+;	main.c:175: D3 = 0;
 ;	genAssign
 	clr	_P2_3
 00112$:
-;	main.c:160: if(a & 16)
+;	main.c:177: if(a & 16)
 ;	genAssign
 	mov	dptr,#_lcd_port_a_1_1
 	movx	a,@dptr
@@ -740,17 +744,17 @@ _lcd_port:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.4,00114$
 ;	Peephole 300	removed redundant label 00139$
-;	main.c:161: D4 = 1;
+;	main.c:178: D4 = 1;
 ;	genAssign
 	setb	_P2_4
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00115$
 00114$:
-;	main.c:163: D4 = 0;
+;	main.c:180: D4 = 0;
 ;	genAssign
 	clr	_P2_4
 00115$:
-;	main.c:165: if(a & 32)
+;	main.c:182: if(a & 32)
 ;	genAssign
 	mov	dptr,#_lcd_port_a_1_1
 	movx	a,@dptr
@@ -761,17 +765,17 @@ _lcd_port:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.5,00117$
 ;	Peephole 300	removed redundant label 00140$
-;	main.c:166: D5 = 1;
+;	main.c:183: D5 = 1;
 ;	genAssign
 	setb	_P2_5
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00118$
 00117$:
-;	main.c:168: D5 = 0;
+;	main.c:185: D5 = 0;
 ;	genAssign
 	clr	_P2_5
 00118$:
-;	main.c:170: if(a & 64)
+;	main.c:187: if(a & 64)
 ;	genAssign
 	mov	dptr,#_lcd_port_a_1_1
 	movx	a,@dptr
@@ -782,17 +786,17 @@ _lcd_port:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.6,00120$
 ;	Peephole 300	removed redundant label 00141$
-;	main.c:171: D6 = 1;
+;	main.c:188: D6 = 1;
 ;	genAssign
 	setb	_P2_6
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00121$
 00120$:
-;	main.c:173: D6 = 0;
+;	main.c:190: D6 = 0;
 ;	genAssign
 	clr	_P2_6
 00121$:
-;	main.c:175: if(a & 128)
+;	main.c:192: if(a & 128)
 ;	genAssign
 	mov	dptr,#_lcd_port_a_1_1
 	movx	a,@dptr
@@ -802,14 +806,14 @@ _lcd_port:
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	acc.7,00123$
 ;	Peephole 300	removed redundant label 00142$
-;	main.c:176: D7 = 1;
+;	main.c:193: D7 = 1;
 ;	genAssign
 	setb	_P2_7
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 251.b	replaced sjmp to ret with ret
 	ret
 00123$:
-;	main.c:178: D7 = 0;
+;	main.c:195: D7 = 0;
 ;	genAssign
 	clr	_P2_7
 ;	Peephole 300	removed redundant label 00125$
@@ -819,7 +823,7 @@ _lcd_port:
 ;------------------------------------------------------------
 ;a                         Allocated with name '_lcdcmd_a_1_1'
 ;------------------------------------------------------------
-;	main.c:181: void lcdcmd(char a)
+;	main.c:198: void lcdcmd(char a)
 ;	-----------------------------------------
 ;	 function lcdcmd
 ;	-----------------------------------------
@@ -828,26 +832,26 @@ _lcdcmd:
 	mov	a,dpl
 	mov	dptr,#_lcdcmd_a_1_1
 	movx	@dptr,a
-;	main.c:183: rw=0;                // => Enable Write
+;	main.c:200: rw=0;                // => Enable Write
 ;	genAssign
 	clr	_P1_7
-;	main.c:184: rs = 0;             // => RS = 0
+;	main.c:201: rs = 0;             // => RS = 0
 ;	genAssign
 	clr	_P1_0
-;	main.c:186: P2=a;
+;	main.c:203: P2=a;
 ;	genAssign
 	mov	dptr,#_lcdcmd_a_1_1
 	movx	a,@dptr
 	mov	_P2,a
-;	main.c:187: en  = 1;             // => E = 1
+;	main.c:204: en  = 1;             // => E = 1
 ;	genAssign
 	setb	_P1_1
-;	main.c:188: delay(5);
+;	main.c:205: delay(5);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0005
 	lcall	_delay
-;	main.c:189: en  = 0;             // => E = 0
+;	main.c:206: en  = 0;             // => E = 0
 ;	genAssign
 	clr	_P1_1
 ;	Peephole 300	removed redundant label 00101$
@@ -857,7 +861,7 @@ _lcdcmd:
 ;------------------------------------------------------------
 ;a                         Allocated with name '_lcddata_b_a_1_1'
 ;------------------------------------------------------------
-;	main.c:193: void lcddata_b(char a)
+;	main.c:210: void lcddata_b(char a)
 ;	-----------------------------------------
 ;	 function lcddata_b
 ;	-----------------------------------------
@@ -866,26 +870,26 @@ _lcddata_b:
 	mov	a,dpl
 	mov	dptr,#_lcddata_b_a_1_1
 	movx	@dptr,a
-;	main.c:197: rw=0;                // => Enable Write
+;	main.c:214: rw=0;                // => Enable Write
 ;	genAssign
 	clr	_P1_7
-;	main.c:198: rs = 1;             // => RS = 1
+;	main.c:215: rs = 1;             // => RS = 1
 ;	genAssign
 	setb	_P1_0
-;	main.c:200: P2=a;
+;	main.c:217: P2=a;
 ;	genAssign
 	mov	dptr,#_lcddata_b_a_1_1
 	movx	a,@dptr
 	mov	_P2,a
-;	main.c:201: en  = 1;             // => E = 1
+;	main.c:218: en  = 1;             // => E = 1
 ;	genAssign
 	setb	_P1_1
-;	main.c:202: delay(5);
+;	main.c:219: delay(5);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0005
 	lcall	_delay
-;	main.c:203: en  = 0;             // => E = 04
+;	main.c:220: en  = 0;             // => E = 04
 ;	genAssign
 	clr	_P1_1
 ;	Peephole 300	removed redundant label 00101$
@@ -894,37 +898,37 @@ _lcddata_b:
 ;Allocation info for local variables in function 'lcd_init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:207: void lcd_init()
+;	main.c:224: void lcd_init()
 ;	-----------------------------------------
 ;	 function lcd_init
 ;	-----------------------------------------
 _lcd_init:
-;	main.c:209: cs1=1;
+;	main.c:226: cs1=1;
 ;	genAssign
 	setb	_P1_5
-;	main.c:210: cs2=0;
+;	main.c:227: cs2=0;
 ;	genAssign
 	clr	_P1_4
-;	main.c:211: re=1;
+;	main.c:228: re=1;
 ;	genAssign
 	setb	_P1_6
-;	main.c:213: lcdcmd(0x3F);    //Display on
+;	main.c:230: lcdcmd(0x3F);    //Display on
 ;	genCall
 	mov	dpl,#0x3F
 	lcall	_lcdcmd
-;	main.c:214: lcdcmd(0x40);    //Setting y-address
+;	main.c:231: lcdcmd(0x40);    //Setting y-address
 ;	genCall
 	mov	dpl,#0x40
 	lcall	_lcdcmd
-;	main.c:215: lcdcmd(0xB8);    //Setting x-address page 1 is selected
+;	main.c:232: lcdcmd(0xB8);    //Setting x-address page 1 is selected
 ;	genCall
 	mov	dpl,#0xB8
 	lcall	_lcdcmd
-;	main.c:216: lcdcmd(0xC0);    //start line
+;	main.c:233: lcdcmd(0xC0);    //start line
 ;	genCall
 	mov	dpl,#0xC0
 	lcall	_lcdcmd
-;	main.c:218: for(i=1;i<9;i++)
+;	main.c:235: for(i=1;i<9;i++)
 ;	genAssign
 	mov	dptr,#_i
 	mov	a,#0x01
@@ -952,7 +956,7 @@ _lcd_init:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00108$
 ;	Peephole 300	removed redundant label 00127$
-;	main.c:220: for(j=0;j<64;j++)
+;	main.c:237: for(j=0;j<64;j++)
 ;	genAssign
 	mov	dptr,#_j
 	clr	a
@@ -979,11 +983,11 @@ _lcd_init:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00104$
 ;	Peephole 300	removed redundant label 00128$
-;	main.c:221: lcddata_b(0x00);
+;	main.c:238: lcddata_b(0x00);
 ;	genCall
 	mov	dpl,#0x00
 	lcall	_lcddata_b
-;	main.c:220: for(j=0;j<64;j++)
+;	main.c:237: for(j=0;j<64;j++)
 ;	genAssign
 	mov	dptr,#_j
 	movx	a,@dptr
@@ -1007,7 +1011,7 @@ _lcd_init:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00101$
 00104$:
-;	main.c:222: lcdcmd(0xB8+i);
+;	main.c:239: lcdcmd(0xB8+i);
 ;	genAssign
 	mov	dptr,#_i
 	movx	a,@dptr
@@ -1026,7 +1030,7 @@ _lcd_init:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_lcdcmd
-;	main.c:218: for(i=1;i<9;i++)
+;	main.c:235: for(i=1;i<9;i++)
 ;	genAssign
 	mov	dptr,#_i
 	movx	a,@dptr
@@ -1050,29 +1054,29 @@ _lcd_init:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00105$
 00108$:
-;	main.c:224: cs1=0;
+;	main.c:241: cs1=0;
 ;	genAssign
 	clr	_P1_5
-;	main.c:225: cs2=1;
+;	main.c:242: cs2=1;
 ;	genAssign
 	setb	_P1_4
-;	main.c:227: lcdcmd(0x3F);    //Display on
+;	main.c:244: lcdcmd(0x3F);    //Display on
 ;	genCall
 	mov	dpl,#0x3F
 	lcall	_lcdcmd
-;	main.c:228: lcdcmd(0x40);    //Setting y-address
+;	main.c:245: lcdcmd(0x40);    //Setting y-address
 ;	genCall
 	mov	dpl,#0x40
 	lcall	_lcdcmd
-;	main.c:229: lcdcmd(0xB8);    //Setting x-address page 1 is selected
+;	main.c:246: lcdcmd(0xB8);    //Setting x-address page 1 is selected
 ;	genCall
 	mov	dpl,#0xB8
 	lcall	_lcdcmd
-;	main.c:230: lcdcmd(0xC0);    //start line
+;	main.c:247: lcdcmd(0xC0);    //start line
 ;	genCall
 	mov	dpl,#0xC0
 	lcall	_lcdcmd
-;	main.c:232: for(i=1;i<9;i++)
+;	main.c:249: for(i=1;i<9;i++)
 ;	genAssign
 	mov	dptr,#_i
 	mov	a,#0x01
@@ -1100,7 +1104,7 @@ _lcd_init:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00117$
 ;	Peephole 300	removed redundant label 00129$
-;	main.c:234: for(j=0;j<64;j++)
+;	main.c:251: for(j=0;j<64;j++)
 ;	genAssign
 	mov	dptr,#_j
 	clr	a
@@ -1127,11 +1131,11 @@ _lcd_init:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00112$
 ;	Peephole 300	removed redundant label 00130$
-;	main.c:235: lcddata_b(0x00);
+;	main.c:252: lcddata_b(0x00);
 ;	genCall
 	mov	dpl,#0x00
 	lcall	_lcddata_b
-;	main.c:234: for(j=0;j<64;j++)
+;	main.c:251: for(j=0;j<64;j++)
 ;	genAssign
 	mov	dptr,#_j
 	movx	a,@dptr
@@ -1155,7 +1159,7 @@ _lcd_init:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00109$
 00112$:
-;	main.c:236: lcdcmd(0xB8+i);
+;	main.c:253: lcdcmd(0xB8+i);
 ;	genAssign
 	mov	dptr,#_i
 	movx	a,@dptr
@@ -1174,7 +1178,7 @@ _lcd_init:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_lcdcmd
-;	main.c:232: for(i=1;i<9;i++)
+;	main.c:249: for(i=1;i<9;i++)
 ;	genAssign
 	mov	dptr,#_i
 	movx	a,@dptr
@@ -1203,42 +1207,52 @@ _lcd_init:
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:241: void main(void)
+;	main.c:258: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	main.c:243: lcd_init();
+;	main.c:260: lcd_init();
 ;	genCall
 	lcall	_lcd_init
-;	main.c:246: cs1=1;
+;	main.c:263: cs1=1;
 ;	genAssign
 	setb	_P1_5
-;	main.c:247: cs2=0;
+;	main.c:264: cs2=0;
 ;	genAssign
 	clr	_P1_4
-;	main.c:248: lcdcmd(0x3F);    //Display on
+;	main.c:265: lcdcmd(0x3F);    //Display on
 ;	genCall
 	mov	dpl,#0x3F
 	lcall	_lcdcmd
-;	main.c:249: while(1)
-00117$:
-;	main.c:250: { next_block=1;
+;	main.c:266: while(1)
+00111$:
+;	main.c:268: next_block=3;
 ;	genAssign
 	mov	dptr,#_next_block
-	mov	a,#0x01
+	mov	a,#0x03
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	main.c:251: for(chip=0;chip<2;chip++)
+;	main.c:271: lcdcmd(0x3F);    //Display on
+;	genCall
+	mov	dpl,#0x3F
+	lcall	_lcdcmd
+;	main.c:272: cs1=1;
+;	genAssign
+	setb	_P1_5
+;	main.c:273: cs2=0;
+;	genAssign
+	clr	_P1_4
+;	main.c:275: for(chip=0;chip<2;chip++)
 ;	genAssign
 	mov	dptr,#_chip
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-00135$:
+00129$:
 ;	genAssign
 	mov	dptr,#_chip
 	movx	a,@dptr
@@ -1255,10 +1269,10 @@ _main:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-;	Peephole 108.a	removed ljmp by inverse jump logic
-	jnc	00117$
-;	Peephole 300	removed redundant label 00158$
-;	main.c:253: for(k=0x7F;k>=0x40;k=k-8)
+	jc	00174$
+	ljmp	00132$
+00174$:
+;	main.c:277: for(k=0x7F;k>=0x40;k=k-8)
 ;	genAssign
 	mov	dptr,#_k
 	mov	a,#0x7F
@@ -1266,7 +1280,7 @@ _main:
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-00131$:
+00125$:
 ;	genAssign
 	mov	dptr,#_k
 	movx	a,@dptr
@@ -1283,10 +1297,10 @@ _main:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jnc	00159$
-	ljmp	00134$
-00159$:
-;	main.c:255: for(j=0xBD;j>=0xBA;j--)
+	jnc	00175$
+	ljmp	00128$
+00175$:
+;	main.c:279: for(j=0xBD;j>=0xBA;j--)     //Individual colum part
 ;	genAssign
 	mov	dptr,#_j
 	mov	a,#0xBD
@@ -1294,7 +1308,7 @@ _main:
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-00119$:
+00113$:
 ;	genAssign
 	mov	dptr,#_j
 	movx	a,@dptr
@@ -1311,15 +1325,15 @@ _main:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jnc	00160$
-	ljmp	00122$
-00160$:
-;	main.c:257: lcdcmd(j);
+	jnc	00176$
+	ljmp	00116$
+00176$:
+;	main.c:281: lcdcmd(j);
 ;	genCast
 ;	genCall
 	mov	dpl,r2
 	lcall	_lcdcmd
-;	main.c:258: for(i=k;i>=k-15;i--)
+;	main.c:282: for(i=k;i>=k-15;i--)        //ROWS part- writing done column by column
 ;	genAssign
 	mov	dptr,#_k
 	movx	a,@dptr
@@ -1367,15 +1381,15 @@ _main:
 	xrl	b,#0x80
 	subb	a,b
 ;	genIfxJump
-	jnc	00161$
+	jnc	00177$
 	ljmp	00107$
-00161$:
-;	main.c:260: lcdcmd(i);
+00177$:
+;	main.c:284: lcdcmd(i);
 ;	genCast
 ;	genCall
 	mov	dpl,r4
 	lcall	_lcdcmd
-;	main.c:261: if(!(block[next_block][k-i][0xBD-j]))
+;	main.c:285: if(!(block[next_block][k-i][0xBD-j]))
 ;	genAssign
 	mov	dptr,#_next_block
 	movx	a,@dptr
@@ -1479,8 +1493,8 @@ _main:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00106$
-;	Peephole 300	removed redundant label 00162$
-;	main.c:264: lcddata_b(block[next_block][k-i][0xBD-j]);
+;	Peephole 300	removed redundant label 00178$
+;	main.c:288: lcddata_b(block[next_block][k-i][0xBD-j]);
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -1537,7 +1551,7 @@ _main:
 	mov	dpl,a
 	lcall	_lcddata_b
 00106$:
-;	main.c:258: for(i=k;i>=k-15;i--)
+;	main.c:282: for(i=k;i>=k-15;i--)        //ROWS part- writing done column by column
 ;	genAssign
 	mov	dptr,#_i
 	movx	a,@dptr
@@ -1548,9 +1562,9 @@ _main:
 ;	genMinus
 ;	genMinusDec
 	dec	r2
-	cjne	r2,#0xff,00163$
+	cjne	r2,#0xff,00179$
 	dec	r3
-00163$:
+00179$:
 ;	genAssign
 	mov	dptr,#_i
 	mov	a,r2
@@ -1560,12 +1574,12 @@ _main:
 	movx	@dptr,a
 	ljmp	00104$
 00107$:
-;	main.c:266: delay(50);
+;	main.c:290: delay(50);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0032
 	lcall	_delay
-;	main.c:255: for(j=0xBD;j>=0xBA;j--)
+;	main.c:279: for(j=0xBD;j>=0xBA;j--)     //Individual colum part
 ;	genAssign
 	mov	dptr,#_j
 	movx	a,@dptr
@@ -1576,9 +1590,9 @@ _main:
 ;	genMinus
 ;	genMinusDec
 	dec	r2
-	cjne	r2,#0xff,00164$
+	cjne	r2,#0xff,00180$
 	dec	r3
-00164$:
+00180$:
 ;	genAssign
 	mov	dptr,#_j
 	mov	a,r2
@@ -1586,14 +1600,14 @@ _main:
 	inc	dptr
 	mov	a,r3
 	movx	@dptr,a
-	ljmp	00119$
-00122$:
-;	main.c:268: delay(2000);
+	ljmp	00113$
+00116$:
+;	main.c:292: delay(2000);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x07D0
 	lcall	_delay
-;	main.c:270: for(j=0xBD;j>=0xBA;j--)
+;	main.c:294: for(j=0xBD;j>=0xBA;j--)
 ;	genAssign
 	mov	dptr,#_j
 	mov	a,#0xBD
@@ -1601,7 +1615,7 @@ _main:
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-00127$:
+00121$:
 ;	genAssign
 	mov	dptr,#_j
 	movx	a,@dptr
@@ -1618,15 +1632,15 @@ _main:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jnc	00165$
-	ljmp	00130$
-00165$:
-;	main.c:272: lcdcmd(j);
+	jnc	00181$
+	ljmp	00127$
+00181$:
+;	main.c:296: lcdcmd(j);
 ;	genCast
 ;	genCall
 	mov	dpl,r2
 	lcall	_lcdcmd
-;	main.c:273: for(i=k;i>=k-15;i--)
+;	main.c:297: for(i=k;i>=k-15;i--)
 ;	genAssign
 	mov	dptr,#_k
 	movx	a,@dptr
@@ -1641,7 +1655,7 @@ _main:
 	inc	dptr
 	mov	a,r3
 	movx	@dptr,a
-00123$:
+00117$:
 ;	genAssign
 	mov	dptr,#_k
 	movx	a,@dptr
@@ -1676,14 +1690,14 @@ _main:
 ;	genIfxJump
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 160.a	removed sjmp by inverse jump logic
-	jc	00126$
-;	Peephole 300	removed redundant label 00166$
-;	main.c:275: lcdcmd(i);
+	jc	00120$
+;	Peephole 300	removed redundant label 00182$
+;	main.c:299: lcdcmd(i);
 ;	genCast
 ;	genCall
 	mov	dpl,r4
 	lcall	_lcdcmd
-;	main.c:276: lcddata_b(block[0][k-i][0xBD-j]);
+;	main.c:300: lcddata_b(block[0][k-i][0xBD-j]);
 ;	genAssign
 	mov	dptr,#_k
 	movx	a,@dptr
@@ -1752,7 +1766,7 @@ _main:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_lcddata_b
-;	main.c:273: for(i=k;i>=k-15;i--)
+;	main.c:297: for(i=k;i>=k-15;i--)
 ;	genAssign
 	mov	dptr,#_i
 	movx	a,@dptr
@@ -1763,9 +1777,9 @@ _main:
 ;	genMinus
 ;	genMinusDec
 	dec	r2
-	cjne	r2,#0xff,00167$
+	cjne	r2,#0xff,00183$
 	dec	r3
-00167$:
+00183$:
 ;	genAssign
 	mov	dptr,#_i
 	mov	a,r2
@@ -1774,14 +1788,14 @@ _main:
 	mov	a,r3
 	movx	@dptr,a
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00123$
-00126$:
-;	main.c:278: delay(50);
+	sjmp	00117$
+00120$:
+;	main.c:302: delay(50);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0032
 	lcall	_delay
-;	main.c:270: for(j=0xBD;j>=0xBA;j--)
+;	main.c:294: for(j=0xBD;j>=0xBA;j--)
 ;	genAssign
 	mov	dptr,#_j
 	movx	a,@dptr
@@ -1792,9 +1806,9 @@ _main:
 ;	genMinus
 ;	genMinusDec
 	dec	r2
-	cjne	r2,#0xff,00168$
+	cjne	r2,#0xff,00184$
 	dec	r3
-00168$:
+00184$:
 ;	genAssign
 	mov	dptr,#_j
 	mov	a,r2
@@ -1802,60 +1816,9 @@ _main:
 	inc	dptr
 	mov	a,r3
 	movx	@dptr,a
-	ljmp	00127$
-00130$:
-;	genIfx
-;	genIfxJump
-;	Peephole 108.e	removed ljmp by inverse jump logic
-	jb	_P3_4,00133$
-;	Peephole 300	removed redundant label 00169$
-;	main.c:284: if(next_block<4)
-;	genAssign
-	mov	dptr,#_next_block
-	movx	a,@dptr
-	mov	r2,a
-	inc	dptr
-	movx	a,@dptr
-	mov	r3,a
-;	genCmpLt
-;	genCmp
-	clr	c
-	mov	a,r2
-	subb	a,#0x04
-	mov	a,r3
-	xrl	a,#0x80
-	subb	a,#0x80
-;	genIfxJump
-;	Peephole 108.a	removed ljmp by inverse jump logic
-	jnc	00109$
-;	Peephole 300	removed redundant label 00170$
-;	main.c:285: next_block++;
-;	genPlus
-	mov	dptr,#_next_block
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r2 instead of ar2
-	add	a,r2
-	movx	@dptr,a
-;	Peephole 181	changed mov to clr
-	clr	a
-;	Peephole 236.b	used r3 instead of ar3
-	addc	a,r3
-	inc	dptr
-	movx	@dptr,a
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00133$
-00109$:
-;	main.c:287: next_block=1;
-;	genAssign
-	mov	dptr,#_next_block
-	mov	a,#0x01
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-00133$:
-;	main.c:253: for(k=0x7F;k>=0x40;k=k-8)
+	ljmp	00121$
+00127$:
+;	main.c:277: for(k=0x7F;k>=0x40;k=k-8)
 ;	genAssign
 	mov	dptr,#_k
 	movx	a,@dptr
@@ -1877,9 +1840,9 @@ _main:
 	inc	dptr
 	mov	a,r3
 	movx	@dptr,a
-	ljmp	00131$
-00134$:
-;	main.c:292: if(chip==0)
+	ljmp	00125$
+00128$:
+;	main.c:317: if(chip==0)
 ;	genAssign
 	mov	dptr,#_chip
 	movx	a,@dptr
@@ -1892,33 +1855,20 @@ _main:
 	orl	a,r2
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
-	jnz	00114$
-;	Peephole 300	removed redundant label 00171$
-;	main.c:294: lcdcmd(0x3F);    //Display on
+	jnz	00131$
+;	Peephole 300	removed redundant label 00185$
+;	main.c:319: lcdcmd(0x3F);    //Display on
 ;	genCall
 	mov	dpl,#0x3F
 	lcall	_lcdcmd
-;	main.c:295: cs1=0;
+;	main.c:320: cs1=0;
 ;	genAssign
 	clr	_P1_5
-;	main.c:296: cs2=1;
+;	main.c:321: cs2=1;
 ;	genAssign
 	setb	_P1_4
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00137$
-00114$:
-;	main.c:300: lcdcmd(0x3F);    //Display on
-;	genCall
-	mov	dpl,#0x3F
-	lcall	_lcdcmd
-;	main.c:301: cs1=1;
-;	genAssign
-	setb	_P1_5
-;	main.c:302: cs2=0;
-;	genAssign
-	clr	_P1_4
-00137$:
-;	main.c:251: for(chip=0;chip<2;chip++)
+00131$:
+;	main.c:275: for(chip=0;chip<2;chip++)
 ;	genAssign
 	mov	dptr,#_chip
 	movx	a,@dptr
@@ -1939,8 +1889,439 @@ _main:
 	addc	a,r3
 	inc	dptr
 	movx	@dptr,a
-	ljmp	00135$
-;	Peephole 259.b	removed redundant label 00139$ and ret
+	ljmp	00129$
+00132$:
+;	main.c:326: for(j=0;j<16;j++)              //Copy the rows--Copying done row by row(entire row first
+;	genAssign
+	mov	dptr,#_j
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+00137$:
+;	genAssign
+	mov	dptr,#_j
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x10
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+	jc	00186$
+	ljmp	00140$
+00186$:
+;	main.c:328: for(i=0;i<4;i++)        //Copy the columns in the rows
+;	genAssign
+	mov	dptr,#_i
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+00133$:
+;	genAssign
+	mov	dptr,#_i
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x04
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00139$
+;	Peephole 300	removed redundant label 00187$
+;	main.c:330: fixed_blocks[j][i]=block[next_block][j][i];
+;	genAssign
+	mov	dptr,#_j
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+;	genLeftShift
+;	genLeftShiftLiteral
+;	genlshTwo
+	mov	r5,a
+;	Peephole 105	removed redundant mov
+	xch	a,r4
+	add	a,acc
+	xch	a,r4
+	rlc	a
+	xch	a,r4
+	add	a,acc
+	xch	a,r4
+	rlc	a
+	mov	r5,a
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+	add	a,#_fixed_blocks
+	mov	r6,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+	addc	a,#(_fixed_blocks >> 8)
+	mov	r7,a
+;	genPlus
+;	Peephole 236.g	used r2 instead of ar2
+	mov	a,r2
+;	Peephole 236.a	used r6 instead of ar6
+	add	a,r6
+	mov	r6,a
+;	Peephole 236.g	used r3 instead of ar3
+	mov	a,r3
+;	Peephole 236.b	used r7 instead of ar7
+	addc	a,r7
+	mov	r7,a
+;	genAssign
+	mov	dptr,#_next_block
+	movx	a,@dptr
+	mov	r0,a
+	inc	dptr
+	movx	a,@dptr
+;	genLeftShift
+;	genLeftShiftLiteral
+;	genlshTwo
+	mov	r1,a
+;	Peephole 105	removed redundant mov
+	anl	a,#0x03
+	mov	c,acc.0
+	xch	a,r0
+	rrc	a
+	xch	a,r0
+	rrc	a
+	mov	c,acc.0
+	xch	a,r0
+	rrc	a
+	xch	a,r0
+	rrc	a
+	xch	a,r0
+	mov	r1,a
+;	genPlus
+;	Peephole 236.g	used r0 instead of ar0
+	mov	a,r0
+	add	a,#_block
+	mov	r0,a
+;	Peephole 236.g	used r1 instead of ar1
+	mov	a,r1
+	addc	a,#(_block >> 8)
+	mov	r1,a
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+;	Peephole 236.a	used r0 instead of ar0
+	add	a,r0
+	mov	r4,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+;	Peephole 236.b	used r1 instead of ar1
+	addc	a,r1
+	mov	r5,a
+;	genPlus
+;	Peephole 236.g	used r2 instead of ar2
+	mov	a,r2
+;	Peephole 236.a	used r4 instead of ar4
+	add	a,r4
+	mov	dpl,a
+;	Peephole 236.g	used r3 instead of ar3
+	mov	a,r3
+;	Peephole 236.b	used r5 instead of ar5
+	addc	a,r5
+	mov	dph,a
+;	genPointerGet
+;	genCodePointerGet
+	clr	a
+	movc	a,@a+dptr
+;	genPointerSet
+;     genFarPointerSet
+	mov	r4,a
+	mov	dpl,r6
+	mov	dph,r7
+;	Peephole 136	removed redundant move
+	movx	@dptr,a
+;	main.c:328: for(i=0;i<4;i++)        //Copy the columns in the rows
+;	genPlus
+	mov	dptr,#_i
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	inc	dptr
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00133$
+00139$:
+;	main.c:326: for(j=0;j<16;j++)              //Copy the rows--Copying done row by row(entire row first
+;	genAssign
+	mov	dptr,#_j
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+	mov	dptr,#_j
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	inc	dptr
+	movx	@dptr,a
+	ljmp	00137$
+00140$:
+;	main.c:337: for(j=0xBD,m=0;j>=0xBA;j--,m++)     //Individual colum part
+;	genAssign
+	mov	dptr,#_j
+	mov	a,#0xBD
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_m
+	clr	a
+	movx	@dptr,a
+	inc	dptr
+	movx	@dptr,a
+00145$:
+;	genAssign
+	mov	dptr,#_j
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0xBA
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+;	genIfxJump
+	jnc	00188$
+	ljmp	00111$
+00188$:
+;	main.c:339: lcdcmd(j);
+;	genCast
+;	genCall
+	mov	dpl,r2
+	lcall	_lcdcmd
+;	main.c:340: for(i=0x40,k=15;i<=0x4F;i++,k--)        //ROWS part- writing done column by column
+;	genAssign
+	mov	dptr,#_i
+	mov	a,#0x40
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_k
+	mov	a,#0x0F
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+00141$:
+;	genAssign
+	mov	dptr,#_i
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,#0x4F
+	subb	a,r2
+;	Peephole 159	avoided xrl during execution
+	mov	a,#(0x00 ^ 0x80)
+	mov	b,r3
+	xrl	b,#0x80
+	subb	a,b
+;	genIfxJump
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 160.a	removed sjmp by inverse jump logic
+	jc	00144$
+;	Peephole 300	removed redundant label 00189$
+;	main.c:342: lcdcmd(i);
+;	genCast
+;	genCall
+	mov	dpl,r2
+	lcall	_lcdcmd
+;	main.c:343: lcddata_b(fixed_blocks[k][m]);
+;	genAssign
+	mov	dptr,#_k
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+;	genLeftShift
+;	genLeftShiftLiteral
+;	genlshTwo
+	mov	r3,a
+;	Peephole 105	removed redundant mov
+	xch	a,r2
+	add	a,acc
+	xch	a,r2
+	rlc	a
+	xch	a,r2
+	add	a,acc
+	xch	a,r2
+	rlc	a
+	mov	r3,a
+;	genPlus
+;	Peephole 236.g	used r2 instead of ar2
+	mov	a,r2
+	add	a,#_fixed_blocks
+	mov	r2,a
+;	Peephole 236.g	used r3 instead of ar3
+	mov	a,r3
+	addc	a,#(_fixed_blocks >> 8)
+	mov	r3,a
+;	genAssign
+	mov	dptr,#_m
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+;	genPlus
+;	Peephole 236.g	used r4 instead of ar4
+	mov	a,r4
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	mov	dpl,a
+;	Peephole 236.g	used r5 instead of ar5
+	mov	a,r5
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	mov	dph,a
+;	genPointerGet
+;	genFarPointerGet
+	movx	a,@dptr
+;	genCall
+	mov	r2,a
+;	Peephole 244.c	loading dpl from a instead of r2
+	mov	dpl,a
+	lcall	_lcddata_b
+;	main.c:340: for(i=0x40,k=15;i<=0x4F;i++,k--)        //ROWS part- writing done column by column
+;	genAssign
+	mov	dptr,#_i
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+	mov	dptr,#_i
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	inc	dptr
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_k
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genMinus
+;	genMinusDec
+	dec	r2
+	cjne	r2,#0xff,00190$
+	dec	r3
+00190$:
+;	genAssign
+	mov	dptr,#_k
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00141$
+00144$:
+;	main.c:345: delay(50);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0032
+	lcall	_delay
+;	main.c:337: for(j=0xBD,m=0;j>=0xBA;j--,m++)     //Individual colum part
+;	genAssign
+	mov	dptr,#_j
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genMinus
+;	genMinusDec
+	dec	r2
+	cjne	r2,#0xff,00191$
+	dec	r3
+00191$:
+;	genAssign
+	mov	dptr,#_j
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	genAssign
+	mov	dptr,#_m
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+	mov	dptr,#_m
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Peephole 181	changed mov to clr
+	clr	a
+;	Peephole 236.b	used r3 instead of ar3
+	addc	a,r3
+	inc	dptr
+	movx	@dptr,a
+	ljmp	00145$
+;	Peephole 259.b	removed redundant label 00149$ and ret
 ;
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
@@ -2201,7 +2582,72 @@ _block:
 	.db 0x00
 	.db 0x00
 	.db 0x00
-_fixed_blocks:
+	.db #0x0F
+	.db #0x0F
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0x00
+	.db #0xFF
+	.db #0xFF
+	.area XINIT   (CODE)
+__xinit__fixed_blocks:
 	.db #0x00
 	.db 0x00
 	.db 0x00
@@ -2266,196 +2712,3 @@ _fixed_blocks:
 	.db 0x00
 	.db 0x00
 	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.db 0x00
-	.area XINIT   (CODE)

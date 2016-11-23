@@ -20,8 +20,6 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0000    l_REG_BANK_2
      0000    l_REG_BANK_3
      0000    l_RSEG
-     0000    l_XINIT
-     0000    l_XISEG
      0000    l__CODE
      0000    s_BSEG
      0000    s_DSEG
@@ -38,14 +36,16 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0008    s_SSEG
      000A    l_GSINIT2
      0010    s_REG_BANK_2
-     0011    l_XSEG
-     0011    s_XISEG
+     0013    l_XSEG
+     0013    s_XISEG
      0018    s_REG_BANK_3
      0020    s_BIT_BANK
      0020    s_BSEG_BYTES
      0020    s_OSEG
      0022    l_GSINIT3
      002A    l_GSINIT4
+     0040    l_XINIT
+     0040    l_XISEG
      0080    _P0
      0080    _P0_0
      0080    l_DSEG
@@ -260,8 +260,8 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     0200    l_CONST
-     04CC    l_CSEG
+     0140    l_CONST
+     0638    l_CSEG
      2100    s_HOME
      2103    s_GSINIT0
      2106    s_GSINIT1
@@ -272,8 +272,8 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      215C    s_GSINIT
      215C    s_GSINIT5
      215F    s_CSEG
-     262B    s_CONST
-     282B    s_XINIT
+     2797    s_CONST
+     28D7    s_XINIT
 
 Hexadecimal
 
@@ -367,7 +367,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XSEG                               0000   0011 =     17. bytes (REL,CON,XDATA)
+XSEG                               0000   0013 =     19. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
@@ -378,7 +378,11 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XISEG                              0011   0000 =      0. bytes (REL,CON,XDATA)
+XISEG                              0013   0040 =     64. bytes (REL,CON,XDATA)
+
+      Value  Global
+   --------  --------------------------------
+  0D:0013    _fixed_blocks
 
 Hexadecimal
 
@@ -451,7 +455,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               215F   04CC =   1228. bytes (REL,CON,CODE)
+CSEG                               215F   0638 =   1592. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -462,24 +466,23 @@ CSEG                               215F   04CC =   1228. bytes (REL,CON,CODE)
   0C:2228    _lcddata_b
   0C:2243    _lcd_init
   0C:236C    _main
-  0C:2627    __sdcc_external_startup
+  0C:2793    __sdcc_external_startup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              262B   0200 =    512. bytes (REL,CON,CODE)
+CONST                              2797   0140 =    320. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:262B    _block
-  0C:272B    _fixed_blocks
+  0C:2797    _block
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              282B   0000 =      0. bytes (REL,CON,CODE)
+XINIT                              28D7   0040 =     64. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]

@@ -35,17 +35,15 @@
 #define up      P3_5
 #define down    P1_2
 
-#define ROWS	22
-#define COLS	10
-
-#define NUM_PIECES	19
+#define LAST_ROW_FIX    16
+#define LAST_COLUMN_FIX 16
 
 //End LCD Module Connections
 
 char add_x,add_y;
-static int i,j,k,chip,next_block;
+static int i,j,k,m,chip,next_block;
 
-const char block[4][16][4]=
+const char block[5][16][4]=
 {
      //Zero
     {
@@ -124,10 +122,29 @@ const char block[4][16][4]=
     {0x00,0xFF,0xFF,0x00},
     {0x00,0xFF,0xFF,0x00},
     {0x00,0xFF,0xFF,0x00}
+    },
+    //Test for all fs
+    {
+    {0x0F,0x0F,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0x00,0x00},
+    {0x00,0x00,0xFF,0xFF},
     }
 
 };
-const char fixed_blocks[16][16]={{0}};
+char fixed_blocks[16][4]={{0}};
 
 void delay(unsigned int d){
 unsigned int i,j;
@@ -247,15 +264,22 @@ void main(void)
     cs2=0;
     lcdcmd(0x3F);    //Display on
 while(1)
-{ next_block=1;
+{
+    next_block=3;
+    //Switch page for while loop
+
+    lcdcmd(0x3F);    //Display on
+    cs1=1;
+    cs2=0;
+
     for(chip=0;chip<2;chip++)
     {
         for(k=0x7F;k>=0x40;k=k-8)
         {
-            for(j=0xBD;j>=0xBA;j--)
+            for(j=0xBD;j>=0xBA;j--)     //Individual colum part
             {
                 lcdcmd(j);
-                for(i=k;i>=k-15;i--)
+                for(i=k;i>=k-15;i--)        //ROWS part- writing done column by column
                 {
                     lcdcmd(i);
                     if(!(block[next_block][k-i][0xBD-j]))
@@ -278,30 +302,50 @@ while(1)
                 delay(50);
 
             }
+        }
             /*****************************/
-                if(right==0)
+               /* if(right==0)
                     {
                         if(next_block<4)
                             next_block++;
                         else
                             next_block=1;
-                    }
+                    }*/
             /********************************/
 
-        }
+
         if(chip==0)
         {
-        lcdcmd(0x3F);    //Display on
-        cs1=0;
-        cs2=1;
+            lcdcmd(0x3F);    //Display on
+            cs1=0;
+            cs2=1;
         }
-        else
-        {
-           lcdcmd(0x3F);    //Display on
-        cs1=1;
-        cs2=0;
-        }
+
     }
+        /**********************************/
+        for(j=0;j<16;j++)              //Copy the rows--Copying done row by row(entire row first
+            {
+                for(i=0;i<4;i++)        //Copy the columns in the rows
+                {
+                   fixed_blocks[j][i]=block[next_block][j][i];
+                }
+            }
+
+        /************************************************/
+        //Printing the fixed blocks print the whole page so that the screen is always updated
+
+            for(j=0xBD,m=0;j>=0xBA;j--,m++)     //Individual colum part
+            {
+                lcdcmd(j);
+                for(i=0x40,k=15;i<=0x4F;i++,k--)        //ROWS part- writing done column by column
+                {
+                    lcdcmd(i);
+                    lcddata_b(fixed_blocks[k][m]);
+                }
+                delay(50);
+            }
+
+
 }
 
    //while(1);     //Remain for ever here

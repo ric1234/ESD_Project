@@ -386,25 +386,27 @@ Symbol Table
     __sdcc_gsinit_startup                                          **** GX
  14 __sdcc_program_startup                                         0000 GR
   5 __start__stack                                                 0000 GR
+ 16 __xinit__fixed_blocks                                          0000 R
   9 _add_x                                                         0000 GR
   9 _add_y                                                         0001 GR
  15 _block                                                         0000 GR
-  9 _chip                                                          0008 R
+  9 _chip                                                          000A R
  14 _delay                                                         0005 GR
-  9 _delay_d_1_1                                                   000C R
- 15 _fixed_blocks                                                  0100 GR
+  9 _delay_d_1_1                                                   000E R
+  A _fixed_blocks                                                  0000 GR
   9 _i                                                             0002 R
   9 _j                                                             0004 R
   9 _k                                                             0006 R
  14 _lcd_init                                                      00E4 GR
  14 _lcd_port                                                      0038 GR
-  9 _lcd_port_a_1_1                                                000E R
+  9 _lcd_port_a_1_1                                                0010 R
  14 _lcdcmd                                                        00AE GR
-  9 _lcdcmd_a_1_1                                                  000F R
+  9 _lcdcmd_a_1_1                                                  0011 R
  14 _lcddata_b                                                     00C9 GR
-  9 _lcddata_b_a_1_1                                               0010 R
+  9 _lcddata_b_a_1_1                                               0012 R
+  9 _m                                                             0008 R
  14 _main                                                          020D GR
-  9 _next_block                                                    000A R
+  9 _next_block                                                    000C R
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -595,8 +597,8 @@ Area Table
    6 ISEG                                                                               size    0   flags 0
    7 BSEG                                                                               size    0   flags 80
    8 PSEG                                                                               size    0   flags 50
-   9 XSEG                                                                               size   11   flags 40
-   A XISEG                                                                              size    0   flags 40
+   9 XSEG                                                                               size   13   flags 40
+   A XISEG                                                                              size   40   flags 40
    B HOME                                                                               size    3   flags 20
    C GSINIT0                                                                            size    0   flags 20
    D GSINIT1                                                                            size    0   flags 20
@@ -606,6 +608,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size  4C8   flags 20
-  15 CONST                                                                              size  200   flags 20
-  16 XINIT                                                                              size    0   flags 20
+  14 CSEG                                                                               size  634   flags 20
+  15 CONST                                                                              size  140   flags 20
+  16 XINIT                                                                              size   40   flags 20
