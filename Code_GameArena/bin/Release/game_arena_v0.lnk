@@ -1,0 +1,22 @@
+-myuxi
+-Y
+-a 0x0100
+-v 0x8000
+-w 0x8000
+-b HOME = 0x0000
+-b ISEG = 0x0080
+-b BSEG = 0x0000
+-k C:\Program Files (x86)\sdcc\lib
+-k C:\SDCC\bin\..\lib\large
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+obj\Release\i2c..rel
+obj\Release\lcd..rel
+obj\Release\main..rel
+obj\Release\racing..rel
+obj\Release\snake..rel
+
+-e

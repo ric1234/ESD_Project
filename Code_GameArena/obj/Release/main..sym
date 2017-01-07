@@ -176,14 +176,7 @@ Symbol Table
     _AUXR1                                                      =  00A2 G
     _B                                                          =  00F0 G
     _BDRCON                                                     =  009B G
-    _BREG_F0                                                    =  00F0 G
-    _BREG_F1                                                    =  00F1 G
-    _BREG_F2                                                    =  00F2 G
-    _BREG_F3                                                    =  00F3 G
-    _BREG_F4                                                    =  00F4 G
-    _BREG_F5                                                    =  00F5 G
-    _BREG_F6                                                    =  00F6 G
-    _BREG_F7                                                    =  00F7 G
+ 15 _BITMAP                                                        0050 GR
     _BRL                                                        =  009A G
     _CCAP0H                                                     =  00FA G
     _CCAP0L                                                     =  00EA G
@@ -217,8 +210,6 @@ Symbol Table
     _CR                                                         =  00DE G
     _CY                                                         =  00D7 G
     _C_T2                                                       =  00C9 G
-    _DP0H                                                       =  0083 G
-    _DP0L                                                       =  0082 G
     _DPH                                                        =  0083 G
     _DPL                                                        =  0082 G
     _EA                                                         =  00AF G
@@ -322,6 +313,7 @@ Symbol Table
     _PX0L                                                       =  00B8 G
     _PX1                                                        =  00BA G
     _PX1L                                                       =  00BA G
+ 15 _RACING_BITMAP                                                 0000 GR
     _RB8                                                        =  009A G
     _RCAP2H                                                     =  00CB G
     _RCAP2L                                                     =  00CA G
@@ -332,12 +324,11 @@ Symbol Table
     _RS0                                                        =  00D3 G
     _RS1                                                        =  00D4 G
     _RXD                                                        =  00B0 G
-    _RXD0                                                       =  00B0 G
     _SADDR                                                      =  00A9 G
     _SADEN                                                      =  00B9 G
     _SBUF                                                       =  0099 G
-    _SBUF0                                                      =  0099 G
     _SCON                                                       =  0098 G
+ 15 _SCORE                                                         0140 GR
     _SM0                                                        =  009F G
     _SM1                                                        =  009E G
     _SM2                                                        =  009D G
@@ -375,7 +366,6 @@ Symbol Table
     _TR1                                                        =  008E G
     _TR2                                                        =  00CA G
     _TXD                                                        =  00B1 G
-    _TXD0                                                       =  00B1 G
     _WDTPRG                                                     =  00A7 G
     _WDTRST                                                     =  00A6 G
     _WR                                                         =  00B6 G
@@ -383,30 +373,54 @@ Symbol Table
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
+ 14 __sdcc_external_startup                                        0005 GR
     __sdcc_gsinit_startup                                          **** GX
  14 __sdcc_program_startup                                         0000 GR
   5 __start__stack                                                 0000 GR
- 16 __xinit__fixed_blocks                                          0000 R
-  9 _add_x                                                         0000 GR
-  9 _add_y                                                         0001 GR
- 15 _block                                                         0000 GR
-  9 _chip                                                          000A R
- 14 _delay                                                         0005 GR
-  9 _delay_d_1_1                                                   000E R
-  A _fixed_blocks                                                  0000 GR
-  9 _i                                                             0002 R
-  9 _j                                                             0004 R
-  9 _k                                                             0006 R
- 14 _lcd_init                                                      00E4 GR
- 14 _lcd_port                                                      0038 GR
-  9 _lcd_port_a_1_1                                                0010 R
- 14 _lcdcmd                                                        00AE GR
-  9 _lcdcmd_a_1_1                                                  0011 R
- 14 _lcddata_b                                                     00C9 GR
-  9 _lcddata_b_a_1_1                                               0012 R
-  9 _m                                                             0008 R
- 14 _main                                                          020D GR
-  9 _next_block                                                    000C R
+  9 _arena                                                         01D2 GR
+  9 _blockA                                                        01AA GR
+  9 _blockB                                                        01B4 GR
+  9 _blockC                                                        01BE GR
+  9 _blockD                                                        01C8 GR
+  9 _blockX                                                        0196 GR
+  9 _blockY                                                        01A0 GR
+    _build_road_borders                                            **** GX
+    _build_road_divider                                            **** GX
+    _build_road_divider_1                                          **** GX
+  9 _car_dir                                                       0194 GR
+    _delay                                                         **** GX
+    _generate_random_number                                        **** GX
+ 14 _getchar                                                       0029 GR
+    _glcdUpdate                                                    **** GX
+    _glcdUpdate1                                                   **** GX
+  9 _i                                                             02D2 R
+    _introduction                                                  **** GX
+  9 _j                                                             02D4 R
+    _lcd_init                                                      **** GX
+    _lcd_put_score                                                 **** GX
+    _lcd_put_str                                                   **** GX
+ 14 _main                                                          0035 GR
+  9 _main_block3_started_1_1                                       02D7 R
+  9 _main_refresh_divider_1_1                                      02E3 R
+  9 _main_res_1_1_1                                                02D9 R
+  9 _main_res_2_1_1                                                02DB R
+  9 _main_res_3_1_1                                                02DD R
+  9 _main_score1_1_1                                               02DF R
+  9 _main_score2_1_1                                               02E1 R
+    _menu                                                          **** GX
+    _move_block                                                    **** GX
+    _move_block_other                                              **** GX
+    _move_block_other_1                                            **** GX
+    _move_snake                                                    **** GX
+    _put_food                                                      **** GX
+ 14 _putchar                                                       0017 GR
+  9 _putchar_ch_1_1                                                02D6 R
+    _refreshCarDir                                                 **** GX
+    _refreshSnakeDir                                               **** GX
+  9 _snakeDir                                                      0192 GR
+  9 _snakeLen                                                      0000 GR
+  9 _snakeX                                                        0002 GR
+  9 _snakeY                                                        00CA GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -597,8 +611,8 @@ Area Table
    6 ISEG                                                                               size    0   flags 0
    7 BSEG                                                                               size    0   flags 80
    8 PSEG                                                                               size    0   flags 50
-   9 XSEG                                                                               size   13   flags 40
-   A XISEG                                                                              size   40   flags 40
+   9 XSEG                                                                               size  2E4   flags 40
+   A XISEG                                                                              size    0   flags 40
    B HOME                                                                               size    3   flags 20
    C GSINIT0                                                                            size    0   flags 20
    D GSINIT1                                                                            size    0   flags 20
@@ -608,6 +622,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size  634   flags 20
-  15 CONST                                                                              size  140   flags 20
-  16 XINIT                                                                              size   40   flags 20
+  14 CSEG                                                                               size  612   flags 20
+  15 CONST                                                                              size  190   flags 20
+  16 XINIT                                                                              size    0   flags 20

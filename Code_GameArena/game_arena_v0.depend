@@ -1,0 +1,98 @@
+# depslib dependency file v1.0
+1480656470 source:c:\users\akshi\desktop\code_block\snake_v0\main.c
+	<reg51.h>
+	<stdio.h>
+	<at89c51ed2.h>
+	"snake.h"
+	"lcd.h"
+	"racing.h"
+	"bitmap.h"
+
+1480635567 source:c:\users\akshi\desktop\code_block\snake_v0\lcd.c
+	<reg51.h>
+	<stdio.h>
+	<at89c51ed2.h>
+	"lcd.h"
+	"snake.h"
+	"bitmap.h"
+
+1480634330 c:\users\akshi\desktop\code_block\snake_v0\lcd.h
+
+1480657624 c:\users\akshi\desktop\code_block\snake_v0\snake.h
+	<stdint.h>
+
+1480635595 source:c:\users\akshi\desktop\code_block\snake_v0\snake.c
+	<reg51.h>
+	<stdint.h>
+	<at89c51ed2.h>
+	"snake.h"
+	"lcd.h"
+	<stdio.h>
+	"bitmap.h"
+
+1480644943 c:\users\akshi\desktop\code_block\snake_v0\racing.h
+
+1480658755 source:c:\users\akshi\desktop\code_block\snake_v0\racing.c
+	<stdint.h>
+	<at89c51ed2.h>
+	"racing.h"
+	"lcd.h"
+	"snake.h"
+	"bitmap.h"
+
+1480657742 c:\users\akshi\desktop\code_block\snake_v0\bitmap.h
+
+1480893924 source:c:\users\akshi\desktop\code_block\game_arena_vo\lcd.c
+	<reg51.h>
+	<stdio.h>
+	<at89c51ed2.h>
+	"lcd.h"
+	"snake.h"
+	"bitmap.h"
+
+1481328786 c:\users\akshi\desktop\code_block\game_arena_vo\lcd.h
+
+1480712091 c:\users\akshi\desktop\code_block\game_arena_vo\snake.h
+	<stdint.h>
+
+1481328631 c:\users\akshi\desktop\code_block\game_arena_vo\bitmap.h
+
+1480834892 source:c:\users\akshi\desktop\code_block\game_arena_vo\racing.c
+	<stdint.h>
+	<at89c51ed2.h>
+	"racing.h"
+	"lcd.h"
+	"snake.h"
+	"bitmap.h"
+
+1480715498 c:\users\akshi\desktop\code_block\game_arena_vo\racing.h
+
+1480893485 source:c:\users\akshi\desktop\code_block\game_arena_vo\snake.c
+	<reg51.h>
+	<stdint.h>
+	<at89c51ed2.h>
+	"snake.h"
+	"lcd.h"
+	<stdio.h>
+	"bitmap.h"
+
+1480904835 source:c:\users\akshi\desktop\code_block\game_arena_vo\main.c
+	<reg51.h>
+	<stdio.h>
+	<at89c51ed2.h>
+	"snake.h"
+	"lcd.h"
+	"racing.h"
+	"bitmap.h"
+
+1480904649 source:c:\users\akshi\desktop\code_block\game_arena_vo\i2c.c
+	<at89c51ed2.h>
+	<mcs51reg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdint.h>
+	"i2c.h"
+
+1480904819 c:\users\akshi\desktop\code_block\game_arena_vo\i2c.h
+
